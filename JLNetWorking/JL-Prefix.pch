@@ -1,0 +1,18 @@
+//
+//  JL-Prefix.pch
+//  JLNetWorking
+//
+//  Created by JL on 16/8/23.
+//  Copyright © 2016年 JL. All rights reserved.
+//
+
+#ifndef JL_Prefix_pch
+#define JL_Prefix_pch
+
+#import <AFNetworking/AFNetworking.h>
+#import "UtilsMacro.h"
+#import "JLDataStore.h"
+#import "UserModel.h"
+#import "ContentModel.h"
+
+#endif
