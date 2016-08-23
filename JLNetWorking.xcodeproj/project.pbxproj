@@ -73,6 +73,7 @@
 		68254A611D6C30A000B9B30C /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		68254A631D6C334C00B9B30C /* ContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentModel.h; sourceTree = "<group>"; };
 		68254A641D6C334C00B9B30C /* ContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentModel.m; sourceTree = "<group>"; };
+		68254A671D6C4B2B00B9B30C /* APIConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIConfig.h; sourceTree = "<group>"; };
 		8BEF3A1B4024332265A48CAD /* Pods-JLNetWorkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JLNetWorkingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JLNetWorkingTests/Pods-JLNetWorkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		C0756C313BC92C8665A64EC8 /* Pods-JLNetWorkingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JLNetWorkingUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JLNetWorkingUITests/Pods-JLNetWorkingUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E5587616CF91603F96B9B3BB /* Pods-JLNetWorkingUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JLNetWorkingUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JLNetWorkingUITests/Pods-JLNetWorkingUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -154,6 +155,7 @@
 				68254A301D6BFBB600B9B30C /* LaunchScreen.storyboard */,
 				68254A331D6BFBB600B9B30C /* Info.plist */,
 				68254A581D6C24A500B9B30C /* JL-Prefix.pch */,
+				68254A661D6C4B1D00B9B30C /* API */,
 				68254A5F1D6C306A00B9B30C /* Model */,
 				68254A5B1D6C282E00B9B30C /* JLNetWorking */,
 				68254A591D6C274100B9B30C /* Utils */,
@@ -216,6 +218,14 @@
 				68254A641D6C334C00B9B30C /* ContentModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		68254A661D6C4B1D00B9B30C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				68254A671D6C4B2B00B9B30C /* APIConfig.h */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		C5E613628971158B5D98D110 /* Frameworks */ = {

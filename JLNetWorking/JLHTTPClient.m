@@ -16,8 +16,6 @@
     self = [super initWithBaseURL:url sessionConfiguration:configuration];
     
     if ( self ) {
-//        _authorizing = NO;
-        //
         [self checkClientAuthorization];
     }
     return self;
@@ -25,11 +23,45 @@
 
 - (void)checkClientAuthorization
 {
-//    _accessToken = [globalDataStore getStringVariableByKey:kSavedAccessToken];
-//    _accessTokenType = [globalDataStore getStringVariableByKey:kSavedAccessTokenType];
-//    _authorized = ( _accessTokenType ) && ( _accessToken );
-    _authorized =  ( _accessToken );
+    _sessionID = [globalDataStore getStringVariableByKey:kSavedSessionID];
+    _authorized =  ( _sessionID );
 }
 
 
+- (NSURLSessionDataTask *)request:(NSString *)URLString method:(HTTPMethodType)method type:(JLClientRequestType)reqType parameters:(id)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSURLSessionDataTask *, NSError *))failure
+{
+    if ( ![self setRequestSerializerByRequestType:reqType] ) {
+        if ( failure ) failure(nil, [NSError errorWithDomain:kAPI_ERR_Domain code:kAPI_ERR_GeneralUnauthorized userInfo:nil]);  // Need Update
+        return nil;
+    }
+    
+    
+    
+    return nil;
+}
+
+- (AFHTTPRequestSerializer <AFURLRequestSerialization> *)setRequestSerializerByRequestType:(JLClientRequestType)reqType
+{
+    AFHTTPRequestSerializer <AFURLRequestSerialization> *reqSerializer = [self requestSerializerByRequestType:reqType];
+    if ( !reqSerializer ) {
+        return nil;
+    }
+    self.requestSerializer = reqSerializer;
+//    if (kAPP_DEBUG_ENV)
+//    {
+//        self.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+//    }
+    
+    return reqSerializer;
+}
+
+
+- (AFHTTPRequestSerializer <AFURLRequestSerialization> *)requestSerializerByRequestType:(JLClientRequestType)reqType
+{
+    if (reqType) {
+        
+    }
+    
+    return nil;
+}
 @end

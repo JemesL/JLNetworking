@@ -62,3 +62,24 @@
 }
 
 @end
+
+
+@implementation EventModel
+
++ (JSONKeyMapper *)keyMapper{
+    return [[JSONKeyMapper alloc] initWithDictionary:
+            @{
+              @"_id":@"eventID",
+              @"event_type":@"eventType",
+              @"user_id": @"userID",
+              @"user_nickname": @"userNickName",
+              @"user_head_image": @"userHeadImage",
+              @"content": @"content",
+              @"time": @"createTime",
+              @"source_article_id": @"originArticleID",
+              @"source_article_content": @"originArticleContent",
+              }];
+}
+
+@end
+

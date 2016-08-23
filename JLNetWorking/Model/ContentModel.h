@@ -57,5 +57,22 @@
 @property (nonatomic, strong) NSString <Optional> *image;
 @property (nonatomic, strong) NSString <Optional> *urlStr;
 
+@end
+
+
+@protocol EventModel
+@end
+
+@interface EventModel : JSONModel
+
+@property (nonatomic, strong) NSString <Optional> *eventID;
+@property (nonatomic, strong) NSNumber <Optional> *eventType;
+@property (nonatomic, strong) NSString <Optional> *userID;
+@property (nonatomic, strong) NSString <Optional> *userNickName;
+@property (nonatomic, strong) NSString <Optional> *userHeadImage;
+@property (nonatomic, strong) NSString <Optional> *content;
+@property (nonatomic, strong) NSString <Optional> *createTime;
+@property (nonatomic, strong) NSString <Optional> *originArticleID;
+@property (nonatomic, strong) NSString <Optional> *originArticleContent;
 
 @end

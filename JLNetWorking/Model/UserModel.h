@@ -18,5 +18,7 @@
 @property (nonatomic, strong) NSString <Optional> *nickName;
 @property (nonatomic, strong) NSString <Optional> *headImage;
 @property (nonatomic, strong) NSString <Optional> *info;
+@property (nonatomic, strong) NSNumber <Optional> *ifollowed;
 
 @end
+
