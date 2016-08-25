@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		36A142F5318D8620D5CF63F3 /* libPods-JLNetWorking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0643A1AA8C4E5AA803584787 /* libPods-JLNetWorking.a */; };
+		682317301D6EA45A005E69C7 /* JLSecondWorldClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823172F1D6EA45A005E69C7 /* JLSecondWorldClient.m */; };
+		682317331D6EA543005E69C7 /* ContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 682317321D6EA543005E69C7 /* ContentManager.m */; };
+		682317361D6EA812005E69C7 /* UserCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 682317351D6EA812005E69C7 /* UserCenter.m */; };
 		68254A241D6BFBB600B9B30C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68254A231D6BFBB600B9B30C /* main.m */; };
 		68254A271D6BFBB600B9B30C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68254A261D6BFBB600B9B30C /* AppDelegate.m */; };
 		68254A2A1D6BFBB600B9B30C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68254A291D6BFBB600B9B30C /* ViewController.m */; };
@@ -47,6 +50,13 @@
 		248FDDEE8C5AD4AAB4111035 /* libPods-JLNetWorkingUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JLNetWorkingUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E81C14830A271D00D20E92 /* Pods-JLNetWorking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JLNetWorking.release.xcconfig"; path = "Pods/Target Support Files/Pods-JLNetWorking/Pods-JLNetWorking.release.xcconfig"; sourceTree = "<group>"; };
 		51A51FD2C6CC9AC44FF2A1B0 /* Pods-JLNetWorkingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JLNetWorkingTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JLNetWorkingTests/Pods-JLNetWorkingTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6823172E1D6EA45A005E69C7 /* JLSecondWorldClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLSecondWorldClient.h; sourceTree = "<group>"; };
+		6823172F1D6EA45A005E69C7 /* JLSecondWorldClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLSecondWorldClient.m; sourceTree = "<group>"; };
+		682317311D6EA543005E69C7 /* ContentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentManager.h; sourceTree = "<group>"; };
+		682317321D6EA543005E69C7 /* ContentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentManager.m; sourceTree = "<group>"; };
+		682317341D6EA812005E69C7 /* UserCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenter.h; sourceTree = "<group>"; };
+		682317351D6EA812005E69C7 /* UserCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenter.m; sourceTree = "<group>"; };
+		682317371D6ED84C005E69C7 /* ErrorConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ErrorConfig.h; sourceTree = "<group>"; };
 		68254A1F1D6BFBB600B9B30C /* JLNetWorking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JLNetWorking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68254A231D6BFBB600B9B30C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		68254A251D6BFBB600B9B30C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -205,6 +215,12 @@
 				68254A561D6C238D00B9B30C /* JLHTTPClient.m */,
 				68254A5C1D6C284300B9B30C /* JLDataStore.h */,
 				68254A5D1D6C284300B9B30C /* JLDataStore.m */,
+				6823172E1D6EA45A005E69C7 /* JLSecondWorldClient.h */,
+				6823172F1D6EA45A005E69C7 /* JLSecondWorldClient.m */,
+				682317311D6EA543005E69C7 /* ContentManager.h */,
+				682317321D6EA543005E69C7 /* ContentManager.m */,
+				682317341D6EA812005E69C7 /* UserCenter.h */,
+				682317351D6EA812005E69C7 /* UserCenter.m */,
 			);
 			path = JLNetWorking;
 			sourceTree = "<group>";
@@ -224,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				68254A671D6C4B2B00B9B30C /* APIConfig.h */,
+				682317371D6ED84C005E69C7 /* ErrorConfig.h */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -500,10 +517,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				68254A2A1D6BFBB600B9B30C /* ViewController.m in Sources */,
+				682317301D6EA45A005E69C7 /* JLSecondWorldClient.m in Sources */,
 				68254A271D6BFBB600B9B30C /* AppDelegate.m in Sources */,
 				68254A621D6C30A000B9B30C /* UserModel.m in Sources */,
 				68254A571D6C238D00B9B30C /* JLHTTPClient.m in Sources */,
 				68254A5E1D6C284300B9B30C /* JLDataStore.m in Sources */,
+				682317331D6EA543005E69C7 /* ContentManager.m in Sources */,
+				682317361D6EA812005E69C7 /* UserCenter.m in Sources */,
 				68254A651D6C334C00B9B30C /* ContentModel.m in Sources */,
 				68254A241D6BFBB600B9B30C /* main.m in Sources */,
 			);

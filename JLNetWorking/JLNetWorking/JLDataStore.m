@@ -18,7 +18,7 @@
 static id _instance = nil;
 
 + (instancetype) singletonStore {
-    if (_instance) {
+    if (_instance == nil) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             _instance = [[self alloc] init];

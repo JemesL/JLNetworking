@@ -38,8 +38,9 @@ typedef enum {
 @interface JLHTTPClient : AFHTTPSessionManager
 
 @property (readonly, strong, nonatomic) NSString *accessToken;
-@property (readonly, strong, nonatomic) NSString *sessionID;
-@property (readonly, nonatomic) BOOL authorized;
+@property ( strong, nonatomic) NSString *sessionID;
+@property ( nonatomic) BOOL authorized;
+@property ( nonatomic) BOOL sessioned;
 
 
 - (NSURLSessionDataTask *)request:(NSString *)URLString
@@ -49,4 +50,7 @@ typedef enum {
                           success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                           failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
+
+- (void)setClientSessionBySessionID:(NSString *)sessionID;
+- (BOOL)checkClientSession;
 @end
