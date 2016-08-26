@@ -76,3 +76,14 @@
 @property (nonatomic, strong) NSString <Optional> *originArticleContent;
 
 @end
+
+@protocol ArticleIndexModel
+@end
+
+@interface ArticleIndexModel : JSONModel
+
+@property (nonatomic, strong) NSArray <Optional, ArticleModel> *articles;
+@property (nonatomic, strong) NSNumber <Optional> *status;
+
+@end
+

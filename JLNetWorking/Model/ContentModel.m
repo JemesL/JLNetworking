@@ -83,3 +83,15 @@
 
 @end
 
+@implementation ArticleIndexModel
+
++ (JSONKeyMapper *)keyMapper{
+    return [[JSONKeyMapper alloc] initWithDictionary:
+            @{
+              @"articles":@"articles",
+              @"status":@"status",
+              }];
+}
+
+@end
+

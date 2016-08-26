@@ -15,5 +15,8 @@
 + (instancetype) sharedContentManager;
 - (BOOL)authorized;
 
+- (void)getHomepageHotArticleListWithPass:(NSString *)pass
+                                  Success:(void (^)(ArticleIndexModel *articleIndex))success
+                                  failure:(void (^)(NSError *error))failure;
 
 @end

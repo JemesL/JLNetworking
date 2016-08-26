@@ -17,5 +17,23 @@
 //- (BOOL)authorized;
 
 #pragma mark Session
-- (void)checkSessionIDWhenAppLaunch;
+- (void)checkClientAuthorization;
+
+- (void)resginerUserWithPhone:(NSString *)phoneNumber
+                     password:(NSString *)password
+                         code:(NSString *)code
+                      success:(void (^)(NSString *sessionID, NSString *userID))success
+                      failure:(void (^)(NSError *error))failure;
+
+
+- (void)loginWithPhone:(NSString *)phoneNumber
+              password:(NSString *)password
+               success:(void (^)(UserModel *user))success
+               failure:(void (^)(NSError *error))failure;
+
+
+
+- (void)changeNicknameWithNewname:(NSString *)newNickname
+                          success:(void (^)(NSDictionary *dict))success
+                          failure:(void (^)(NSError *error))failure;
 @end

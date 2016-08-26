@@ -13,7 +13,7 @@
 @end
 @interface UserModel : JSONModel
 
-@property (nonatomic, strong) NSString *userID;
+@property (nonatomic, strong) NSString <Optional> *userID;
 @property (nonatomic, strong) NSString <Optional> *sex;
 @property (nonatomic, strong) NSString <Optional> *nickName;
 @property (nonatomic, strong) NSString <Optional> *headImage;

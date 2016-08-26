@@ -14,9 +14,9 @@
 {
     return [[JSONKeyMapper alloc] initWithDictionary:
               @{
-                @"_id": @"userID",
+                @"object_id": @"userID",
                 @"sex": @"sex",
-                @"nick_name": @"nickName",
+                @"nickname": @"nickName",
                 @"head_image": @"headImage",
                 @"user_brief_infor": @"info",
                 }];

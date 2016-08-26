@@ -22,4 +22,32 @@ static id _instance = nil;
     return _instance;
 }
 
+
+- (NSURLSessionDataTask *)TSWRequest:(NSString *)URLString
+                              method:(HTTPMethodType)method
+                                type:(JLClientRequestType)reqType
+                          parameters:(id)parameters
+                             success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+{
+    NSMutableDictionary *newParameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
+    switch (reqType) {
+        case JLReq_None:
+            break;
+        
+        case JLReq_JSON_Session:{
+            [newParameters setObject:[globalDataStore getStringVariableByKey:kSavedSessionID] forKey:@"session_id"];
+            break;
+        }
+        case JLReq_JSON_Authorized:{
+            UserModel *user = (UserModel *)[globalDataStore getObjectVariableByKey:kSavedUserInfo];
+            [newParameters setObject:[globalDataStore getStringVariableByKey:kSavedSessionID] forKey:@"session_id"];
+            [newParameters setObject:user.userID forKey:@"object_id"];
+        }
+        default:
+            break;
+    }
+    
+    return [self request:URLString method:method type:reqType parameters:newParameters success:success failure:failure];
+}
 @end

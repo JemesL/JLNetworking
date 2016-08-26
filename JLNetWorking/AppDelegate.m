@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[UserCenter sharedUserCenter] checkSessionIDWhenAppLaunch];
+    [[UserCenter sharedUserCenter] checkClientAuthorization];
     
     return YES;
 }

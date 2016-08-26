@@ -48,4 +48,29 @@ static id _instance = nil;
     [_userDefaults synchronize];
 }
 
+
+- (NSObject <NSCoding> *)getObjectVariableByKey:(NSString *)key
+{
+    NSData *data = [self getDataVariableByKey:key];
+    if (data == nil) return nil;
+    
+    id obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    return obj;
+}
+- (void)saveObjectVariable:(NSObject <NSCoding> *)objValue forKey:(NSString *)key
+{
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:objValue];
+    [self saveDataVariable:data forKey:key];
+}
+- (NSData *)getDataVariableByKey:(NSString *)key
+{
+    NSData *savedData = [_userDefaults dataForKey:key];
+    return savedData;
+}
+- (void)saveDataVariable:(NSData *)dataValue forKey:(NSString *)key
+{
+    [_userDefaults setObject:dataValue forKey:key];
+    [_userDefaults synchronize];
+}
+
 @end

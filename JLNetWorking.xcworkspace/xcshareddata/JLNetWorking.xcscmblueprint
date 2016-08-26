@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "453935DDA9126FC1997364720FC36EF9E8C11109",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "453935DDA9126FC1997364720FC36EF9E8C11109" : 0,
+    "1E5E3127B8F189B728343F1D485A7E11CA2D8AD2" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CAD1993C-161A-426E-9287-0A73892A65C8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "453935DDA9126FC1997364720FC36EF9E8C11109" : "JLNetWorking\/",
+    "1E5E3127B8F189B728343F1D485A7E11CA2D8AD2" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "JLNetWorking",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "JLNetWorking.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JemesL\/Code_exer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1E5E3127B8F189B728343F1D485A7E11CA2D8AD2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JemesL\/JLNetworking.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "453935DDA9126FC1997364720FC36EF9E8C11109"
+    }
+  ]
+}

@@ -17,18 +17,14 @@
     self = [super initWithBaseURL:url sessionConfiguration:configuration];
     
     if ( self ) {
-        [self checkClientAuthorization];
+        
         self.responseSerializer = [AFHTTPResponseSerializer serializer];
         self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", nil];
     }
     return self;
 }
 
-- (void)checkClientAuthorization
-{
-    _sessionID = [globalDataStore getStringVariableByKey:kSavedSessionID];
-    _authorized =  ( _sessionID );
-}
+
 
 - (NSURLSessionDataTask *)request:(NSString *)URLString method:(HTTPMethodType)method type:(JLClientRequestType)reqType parameters:(id)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSURLSessionDataTask *, NSError *))failure
 {
@@ -46,7 +42,15 @@
                 [self processFailureDataTask:task error:error failure:failure];
             }];
             break;
+        case HTTP_POST:{
             
+//            NSData *data = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+            return [self POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [self processSuccessDataTask:task responseObject:responseObject success:success failure:failure];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [self processFailureDataTask:task error:error failure:failure];
+            }];
+        }
         default:
             break;
     }
@@ -95,9 +99,21 @@
         
         NSLog(@"API Error: %ld - %@", [errcode integerValue], errmsg);
         
+        
         if ( failure ) failure(task, secondWorldError);
+        
+        [self handleErrorWithError:secondWorldError];
+        
     } else {
         if ( success ) success(task, responseObject);
+    }
+}
+
+- (void)handleErrorWithError:(NSError *)error
+{
+    if (error.code == 2) { // 需重新登录
+        [self setClientUnauthorized];
+        [[UserCenter sharedUserCenter] checkClientAuthorization];
     }
 }
 
@@ -153,39 +169,52 @@
     } else if ( ( reqType == JLReq_HTTP_Session ) || ( reqType == JLReq_HTTP_Authorized ) ) {
         
         AFHTTPRequestSerializer *httpSerializer = [AFHTTPRequestSerializer serializer];
+        self.responseSerializer = [AFJSONResponseSerializer serializer];
+        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", nil];
         if ( reqType == JLReq_HTTP_Session ) {
-            if ( _authorized ) {
-                [httpSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//                [httpSerializer setValue:_sessionID forHTTPHeaderField:@"session_id"];
+            if ( _sessioned ) {
+                [httpSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             } else {
                 return nil;
             }
         } else {
             if ( _authorized ) {
-                [httpSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+                [httpSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             } else {
                 return nil;
             }
         }
         return httpSerializer;
         
-    } else if ( reqType == JLReq_JSON_Authorized ) {
+    } else if ( ( reqType == JLReq_JSON_Authorized ) || ( reqType ==  JLReq_JSON_Session ) ) {
+        self.responseSerializer = [AFJSONResponseSerializer serializer];
+        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", nil];
         
-        AFJSONRequestSerializer *jsonSerializer = [AFJSONRequestSerializer serializer];
-        if (_authorized) {
-            [jsonSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//            [jsonSerializer setValue:_sessionID forHTTPHeaderField:@"session_id"];
+        if (reqType == JLReq_JSON_Session) {
+            AFJSONRequestSerializer *jsonSerializer = [AFJSONRequestSerializer serializer];
+            
+            if (_sessioned) {
+                [jsonSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            } else {
+                return nil;
+            }
+            return  jsonSerializer;
         } else {
-            return nil;
+            AFJSONRequestSerializer *jsonSerializer = [AFJSONRequestSerializer serializer];
+            if (_authorized) {
+                [jsonSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            } else {
+                return nil;
+            }
+            return  jsonSerializer;
         }
-        return  jsonSerializer;
+        
         
     } else {
         
         return nil;
         
     }
-
 }
 
 - (void)setClientSessionBySessionID:(NSString *)sessionID
@@ -196,11 +225,33 @@
     [[JLDataStore singletonStore] saveStringVariable:_sessionID forKey:kSavedSessionID];
 }
 
-- (BOOL)checkClientSession
+//- (BOOL)checkClientSession
+//{
+//    _sessionID = [[JLDataStore singletonStore] getStringVariableByKey:kSavedSessionID];
+//    _sessioned = (_sessionID);
+//    return _sessioned;
+//}
+
+- (void)checkClientAuthorization
 {
-    _sessionID = [[JLDataStore singletonStore] getStringVariableByKey:kSavedSessionID];
-    _sessioned = (_sessionID);
-    return _sessioned;
+    _sessionID = [globalDataStore getStringVariableByKey:kSavedSessionID];
+    _sessioned =  ( _sessionID );
+    
+    UserModel *user = (UserModel *)[globalDataStore getObjectVariableByKey:kSavedUserInfo];
+    _authorized = ( user.userID ) && ( _sessionID );
+    
+    NSLog(@"_sessioned:%d  _authorized:%d",_sessioned,_authorized);
+}
+
+- (void)setClientUnauthorized
+{
+    [self.operationQueue cancelAllOperations];
+    _sessionID = nil;
+    _sessioned = NO;
+    _authorized = NO;
+    [UserCenter sharedUserCenter].user = nil;
+    [globalDataStore saveStringVariable:_sessionID forKey:kSavedSessionID];
+    [globalDataStore saveObjectVariable:nil forKey:kSavedUserInfo];
 }
 
 //- (void)checkAuthorization
@@ -208,4 +259,17 @@
 //    _sessionID = [globalDataStore getStringVariableByKey:kSavedSessionID];
 //    
 //}
+
+- (void)matchDataModel:(Class)ModelClass responseObject:(id)responseObject failure:(void (^)(NSError *error))failure success:(void (^)(id parsedObject))success
+{
+    NSError *jsonParsingError;
+    NSDictionary *dict = (NSDictionary *)responseObject;
+    id parsedObject = [[ModelClass alloc] initWithDictionary:dict error:&jsonParsingError];
+    
+    if (jsonParsingError) {
+        if ( failure ) failure(jsonParsingError);
+    } else {
+        if ( success ) success(parsedObject);
+    }
+}
 @end

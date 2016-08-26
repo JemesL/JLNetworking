@@ -14,6 +14,7 @@
 
 
 #define kSavedSessionID         @"clientSessionID"
+#define kSavedUserInfo          @"clientUserInfo"
 
 #define kAPI_ERR_Domain         @"com.secondworld"
 

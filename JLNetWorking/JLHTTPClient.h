@@ -30,6 +30,7 @@ typedef enum {
     JLReq_HTTP_Session,
     JLReq_HTTP_Authorized,
     JLReq_HTTP_Public,
+    JLReq_JSON_Session,
     JLReq_JSON_Authorized,
     JLReq_JSON_Public,
     
@@ -50,7 +51,10 @@ typedef enum {
                           success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                           failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
+- (void)matchDataModel:(Class)ModelClass responseObject:(id)responseObject failure:(void (^)(NSError *error))failure success:(void (^)(id parsedObject))success;
 
 - (void)setClientSessionBySessionID:(NSString *)sessionID;
-- (BOOL)checkClientSession;
+//- (BOOL)checkClientSession;
+- (void)checkClientAuthorization;
+- (void)setClientUnauthorized;
 @end
